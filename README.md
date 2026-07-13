@@ -31,19 +31,30 @@ Four fixes that move verification earlier and decorrelate the final gate — mot
 - **Completeness critic** (`completeness-critic`, Sonnet 5, mandatory in DEEP): a lane that attacks what is **missing** — unmodeled dimensions, absent options/stakeholders, unasked decision-critical questions, wrong-scope framing — since correctness checking never finds a dimension that was never modeled. The report gains a required "known gaps / not modeled" section.
 - **Model-diverse final gate** (`crossmodel-adversary`, `claude-fable-5` → `claude-sonnet-5` fallback): a required different-family reviewer in DEEP so blind spots correlated within one model family do not pass unchallenged. The Opus 4.8 certifier remains fail-closed; the cross-model reviewer's rejection forces repair/arbitration.
 
-## Install and run
+## Install (local plugin)
 
-From the parent directory:
+Thinker runs as a **local Claude Code plugin** — no marketplace required.
+
+Clone the repository, then launch Claude Code with the plugin directory loaded:
 
 ```bash
-claude --plugin-dir ./thinker-skill-plugin
+git clone https://github.com/thiaga-gk/critical-thinker-plugin.git
+claude --plugin-dir ./critical-thinker-plugin
 ```
 
-Then ask Claude to use Thinker on a problem or decision. A typical request is:
+`--plugin-dir` points at the folder containing `.claude-plugin/plugin.json` (the repo root); if you already have the repo, just pass its path. After editing plugin files, run `/reload-plugins` inside Claude Code to pick up changes without restarting.
+
+## Usage
+
+Ask Claude to use Thinker on a problem or decision — the skill routes to the lowest safe depth (LIGHT / STANDARD / DEEP) itself:
 
 ```text
 Use Thinker on this problem. Challenge my current answer, ask only questions that could change the decision, and write the final report under docs/.
 ```
+
+You can also invoke the skill explicitly with `/thinker:thinker`.
+
+See [`docs/usage.md`](docs/usage.md) for detailed usage, what to expect in each mode, and worked examples; see [`examples.md`](examples.md) for invocation patterns and anti-examples.
 
 ## Analysis modes
 
@@ -156,6 +167,7 @@ thinker-skill-plugin/
             ├── orchestration.md
             ├── report-contract.md
             ├── opus-validation.md
+            ├── model-map.md
             └── benchmarking.md
 ```
 
