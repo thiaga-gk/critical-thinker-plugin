@@ -1,0 +1,342 @@
+{
+  "suite_name": "thinker-behavioral-benchmark",
+  "version": "2.0.0",
+  "variants": [
+    "BASELINE",
+    "LIGHT",
+    "STANDARD",
+    "DEEP"
+  ],
+  "cases": [
+    {
+      "id": "B01",
+      "category": "light-reversible",
+      "target_mode": "LIGHT",
+      "prompt": "Our 8-person internal team can move a 30-minute weekly sync from Monday 10:00 to Tuesday 10:00. Six people say either works; two have not replied; no customers attend and the change is reversible.",
+      "expectations": [
+        "Choose a proportionate low-cost decision process",
+        "Avoid a multi-agent swarm",
+        "Use reversibility and a simple revisit trigger"
+      ]
+    },
+    {
+      "id": "B02",
+      "category": "light-convention",
+      "target_mode": "LIGHT",
+      "prompt": "An internal greenfield service must choose kebab-case or snake_case for a config key naming convention. Five engineers are affected, no external API exists, and either choice is easy to lint and change before launch.",
+      "expectations": [
+        "Treat this as a low-stakes convention decision",
+        "Avoid broad systems analysis",
+        "Recommend a simple rule and consistency check"
+      ]
+    },
+    {
+      "id": "B03",
+      "category": "light-rollout",
+      "target_mode": "LIGHT",
+      "prompt": "A reversible dashboard filter has passed unit tests. Product wants a 10% internal-user rollout for one week before full release. The feature does not alter stored data or customer billing.",
+      "expectations": [
+        "Recognize low downside and reversibility",
+        "Give a compact monitoring plan",
+        "Do not demand deep evidence before a bounded rollout"
+      ]
+    },
+    {
+      "id": "B04",
+      "category": "anecdotal-demand",
+      "target_mode": "STANDARD",
+      "prompt": "Two enterprise prospects asked for live chat. Sales says this proves we should staff 24/7 live chat globally. We lack volume, conversion, staffing, region, and service-level evidence.",
+      "expectations": [
+        "Separate anecdotes from proof of global demand",
+        "Identify decision-critical demand and economics evidence",
+        "Prefer a measurable bounded pilot when appropriate"
+      ]
+    },
+    {
+      "id": "B05",
+      "category": "churn-pricing",
+      "target_mode": "STANDARD",
+      "prompt": "SaaS churn rose from 4% to 7% in two quarters. Sales blames price and wants a 20% blanket discount. Churn has not been segmented by cohort, plan, tenure, or reason quality.",
+      "expectations": [
+        "Treat price as a hypothesis",
+        "Seek segmentation and discriminating evidence",
+        "Compare blanket discount with targeted or no-discount options"
+      ]
+    },
+    {
+      "id": "B06",
+      "category": "cash-project",
+      "target_mode": "STANDARD",
+      "prompt": "Project Atlas spent $1.8M. Remaining forecast is $900k over 6 months. Unrestricted cash is $2.4M; net burn is $420k/month excluding Atlas. A pause within 30 days costs $120k. No signed customers; two design partners are testing a prototype.",
+      "expectations": [
+        "Separate sunk cost from future decision drivers",
+        "Use supplied financial facts without re-asking",
+        "Compare pause, continue, and milestone-bounded options"
+      ]
+    },
+    {
+      "id": "B07",
+      "category": "vendor-selection",
+      "target_mode": "STANDARD",
+      "prompt": "Choose Cloud A or Cloud B for a new platform. Workload shape, residency, availability target, team skills, budget horizon, lock-in tolerance, migration constraints, and security requirements are not supplied.",
+      "expectations": [
+        "Recognize material under-specification",
+        "Ask a compact high-value question set",
+        "Do not fabricate a vendor winner"
+      ]
+    },
+    {
+      "id": "B08",
+      "category": "personnel-attribution",
+      "target_mode": "STANDARD",
+      "prompt": "Three software releases slipped. The VP says the project manager is weak and should be replaced. The team cites dependency churn, late security reviews, scope changes, and unclear acceptance criteria.",
+      "expectations": [
+        "Treat personnel blame as one hypothesis",
+        "Inspect system interfaces and causal alternatives",
+        "Define evidence that distinguishes competing causes"
+      ]
+    },
+    {
+      "id": "B09",
+      "category": "quality-sampling",
+      "target_mode": "DEEP",
+      "prompt": "A factory dashboard shows 99.8% pass rate. Leadership wants to replace 100% final inspection with 5% random sampling next month. Denominator, rework exclusions, escape rate, severity mix, and measurement-system capability have not been reviewed.",
+      "expectations": [
+        "Challenge metric meaning and sampling safety",
+        "Consider severe escape consequences",
+        "Define a safe evidence and transition path"
+      ]
+    },
+    {
+      "id": "B10",
+      "category": "regulated-outsourcing",
+      "target_mode": "DEEP",
+      "prompt": "A financial-services company is considering outsourcing customer identity verification to a lower-cost vendor. The process is regulated, the vendor uses sub-processors in multiple countries, and failure could block onboarding or admit fraudulent accounts. Contract, data residency, audit rights, incident response, accuracy by segment, and exit capability are not yet reconciled.",
+      "expectations": [
+        "Treat regulatory and operational downside as material",
+        "Inspect vendor, subprocessors, controls, and exit risk",
+        "Avoid a recommendation until decision-critical evidence is reconciled"
+      ]
+    },
+    {
+      "id": "B11",
+      "category": "medical-conflict",
+      "target_mode": "DEEP",
+      "prompt": "Two specialists gave materially different treatment recommendations for a serious condition. One favors immediate surgery; the other favors watchful waiting with repeat imaging. The patient has only summaries, not the imaging report, staging details, or rationale for disagreement.",
+      "expectations": [
+        "Do not resolve a high-stakes medical conflict by intuition",
+        "Identify missing clinical evidence and specialist rationale",
+        "Use cautious decision support and appropriate escalation"
+      ]
+    },
+    {
+      "id": "B12",
+      "category": "supplier-contract",
+      "target_mode": "DEEP",
+      "prompt": "A critical supplier missed three deliveries and may have breached contract. Operations wants immediate termination. Legal notes cure provisions may apply; procurement says the backup supplier has only 60% verified capacity and higher defect history.",
+      "expectations": [
+        "Avoid immediate termination without contract and continuity analysis",
+        "Compare cure, transition, and termination paths",
+        "Examine operational, legal, and supplier-capacity consequences"
+      ]
+    },
+    {
+      "id": "B13",
+      "category": "security-incident",
+      "target_mode": "DEEP",
+      "prompt": "Security suspects credential theft from an external access system. Disabling all external access could interrupt order fulfillment scheduled in two hours. Evidence is incomplete: one anomalous login, a token reuse alert, and no confirmed data exfiltration.",
+      "expectations": [
+        "Prioritize containment and safety without pretending certainty",
+        "Distinguish confirmed facts from incident hypotheses",
+        "Compare reversible containment options and operational consequences"
+      ]
+    },
+    {
+      "id": "B14",
+      "category": "leveraged-acquisition",
+      "target_mode": "DEEP",
+      "prompt": "A board is considering an acquisition funded mostly with new debt. The base case meets covenants, but integration savings are unproven and downside demand scenarios approach covenant thresholds. Management emphasizes the strategic fit.",
+      "expectations": [
+        "Stress-test downside, covenants, and synergy assumptions",
+        "Avoid strategic-fit anchoring",
+        "Include no-deal and staged or protective alternatives"
+      ]
+    },
+    {
+      "id": "B15",
+      "category": "metric-definition",
+      "target_mode": "STANDARD",
+      "prompt": "A retention dashboard reports +12% after onboarding changes, but the cohort definition changed from signup month to first-active month during the same period.",
+      "expectations": [
+        "Challenge metric comparability",
+        "Separate measurement change from product effect",
+        "Propose a fast reconciliation analysis"
+      ]
+    },
+    {
+      "id": "B16",
+      "category": "aggregate-segment-paradox",
+      "target_mode": "STANDARD",
+      "prompt": "An A/B test reports +6% conversion overall, but each of the three largest customer segments is flat or down. Segment mix differs between variants.",
+      "expectations": [
+        "Detect aggregation or mix risk",
+        "Inspect allocation and segment composition",
+        "Avoid accepting the overall uplift at face value"
+      ]
+    },
+    {
+      "id": "B17",
+      "category": "influencer-pipeline",
+      "target_mode": "STANDARD",
+      "prompt": "A founder says an influencer program works because three memorable enterprise leads mentioned a creator. Attribution is incomplete and the program costs $180k per quarter.",
+      "expectations": [
+        "Separate vivid anecdotes from channel economics",
+        "Identify attribution and incrementality evidence",
+        "Compare continue, pause, and bounded test options"
+      ]
+    },
+    {
+      "id": "B18",
+      "category": "hiring-polarized-scores",
+      "target_mode": "STANDARD",
+      "prompt": "A candidate has the highest average interview score, but scores are polarized: two strong hires and two no-hires. Interviewers assessed different competencies and one critical-role exercise was skipped.",
+      "expectations": [
+        "Do not average away material disagreement",
+        "Inspect competency coverage and missing evidence",
+        "Define the smallest discriminating follow-up"
+      ]
+    },
+    {
+      "id": "B19",
+      "category": "local-optimization",
+      "target_mode": "STANDARD",
+      "prompt": "Warehouse picker utilization improved from 72% to 91% after a new target, but the packing queue doubled and late shipments rose. Management wants to raise the picker target again.",
+      "expectations": [
+        "Expand from local utilization to system flow",
+        "Identify bottleneck and incentive effects",
+        "Avoid optimizing a local metric at the expense of outcomes"
+      ]
+    },
+    {
+      "id": "B20",
+      "category": "supplier-defects",
+      "target_mode": "DEEP",
+      "prompt": "Incoming defects from a major supplier are rising. Quality wants more incoming inspection; the supplier says its process is stable. Defect severity, process capability evidence, lot traceability, and escape impact are inconsistent across reports.",
+      "expectations": [
+        "Test inspection as containment versus root-cause solution",
+        "Challenge inconsistent quality evidence",
+        "Examine supplier process capability and severe escape risk"
+      ]
+    },
+    {
+      "id": "B21",
+      "category": "analytics-centralization",
+      "target_mode": "STANDARD",
+      "prompt": "Executives want to centralize all analytics to improve consistency. Business units say local analysts respond faster and understand context. Current metric definitions do conflict, but request lead times and rework rates are not measured.",
+      "expectations": [
+        "Avoid false centralize-versus-localize binary",
+        "Identify governance and service evidence",
+        "Compare hybrid operating models"
+      ]
+    },
+    {
+      "id": "B22",
+      "category": "sales-incentives",
+      "target_mode": "DEEP",
+      "prompt": "Sales compensation is based mostly on new ARR. Renewal quality has worsened, heavy discounts increased, and implementation teams report poor-fit deals. Leadership wants to raise the ARR multiplier further to hit growth targets.",
+      "expectations": [
+        "Examine incentive-driven second-order effects",
+        "Connect local sales metrics to downstream outcomes",
+        "Compare compensation design alternatives and safeguards"
+      ]
+    },
+    {
+      "id": "B23",
+      "category": "api-deprecation",
+      "target_mode": "DEEP",
+      "prompt": "A company wants to deprecate an old API in six months. Eighteen percent of revenue touches customers using it, migration estimates vary from two weeks to nine months, and support cannot reliably identify hidden integrations.",
+      "expectations": [
+        "Treat hidden dependency and revenue risk as material",
+        "Challenge migration estimates and customer visibility",
+        "Design staged deprecation, telemetry, and revisit triggers"
+      ]
+    },
+    {
+      "id": "B24",
+      "category": "policy-pilot-scale",
+      "target_mode": "DEEP",
+      "prompt": "A traffic-calming pilot reduced speeding in three neighborhoods. City leaders want immediate citywide adoption. The pilot neighborhoods were volunteer sites, bus routes and emergency-response effects were not measured, and equity impacts are unknown.",
+      "expectations": [
+        "Challenge generalization from self-selected pilot sites",
+        "Examine transit, emergency, and equity consequences",
+        "Design evidence for scale-up rather than binary acceptance"
+      ]
+    },
+    {
+      "id": "B25",
+      "category": "do-nothing-wins",
+      "target_mode": "LIGHT",
+      "prompt": "A cosmetic bug affects about 20 internal users per month. Fixing it requires a framework upgrade that has previously caused production regressions. There is a one-line workaround in the internal guide.",
+      "expectations": [
+        "Consider do-nothing or defer as a viable option",
+        "Weigh fix risk against low impact",
+        "Avoid over-analysis and propose a simple revisit trigger"
+      ]
+    },
+    {
+      "id": "B26",
+      "category": "first-answer-correct",
+      "target_mode": "LIGHT",
+      "prompt": "A slow database query is confirmed by the query plan to perform a full-table scan because a needed index is absent. In staging, the candidate index reduces p95 latency by 90% with no write-regression signal in the current load test. The change is reversible.",
+      "expectations": [
+        "Keep the likely correct first answer when evidence supports it",
+        "Still state assumptions and monitoring",
+        "Avoid manufacturing alternative causes just to appear critical"
+      ]
+    },
+    {
+      "id": "B27",
+      "category": "nps-churn-conflict",
+      "target_mode": "STANDARD",
+      "prompt": "NPS rose 15 points while churn also rose. Leadership says a recent price increase must be causing churn. Survey response mix changed toward enterprise accounts during the same period.",
+      "expectations": [
+        "Reconcile conflicting metrics and response mix",
+        "Treat pricing causation as a hypothesis",
+        "Identify cohort and churn-reason evidence"
+      ]
+    },
+    {
+      "id": "B28",
+      "category": "vendor-outage-failover",
+      "target_mode": "DEEP",
+      "prompt": "A payment vendor outage is blocking about 40% of transactions. The team can fail over to a less-tested provider or wait for recovery. The backup passed certification six months ago but has not handled production peak volume; transaction replay and reconciliation behavior are partly documented.",
+      "expectations": [
+        "Balance immediate operational loss with failover risk",
+        "Inspect reversibility, reconciliation, and monitoring",
+        "Use scenario-based action thresholds under uncertainty"
+      ]
+    },
+    {
+      "id": "B29",
+      "category": "onboarding-experiment",
+      "target_mode": "STANDARD",
+      "prompt": "Product proposes a new onboarding checklist. Existing event data is incomplete, but the change is easy to gate to 10% of new users and can be rolled back in minutes.",
+      "expectations": [
+        "Recognize weak baseline evidence and high reversibility",
+        "Prefer an instrumented experiment",
+        "Define success, guardrails, and revisit criteria"
+      ]
+    },
+    {
+      "id": "B30",
+      "category": "ai-build-buy",
+      "target_mode": "DEEP",
+      "prompt": "A company with 8,000 employees must choose build versus buy for an internal AI assistant. Security, data residency, integration depth, adoption, model evolution, vendor lock-in, and three-year cost matter. Stakeholders disagree sharply and several estimates are ranges rather than facts.",
+      "expectations": [
+        "Handle coupled technical, security, adoption, and economic trade-offs",
+        "Preserve material stakeholder disagreement until evidence or scenarios resolve it",
+        "Compare build, buy, hybrid, and phased learning paths with revisit triggers"
+      ]
+    }
+  ]
+}

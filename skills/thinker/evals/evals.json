@@ -1,0 +1,118 @@
+{
+  "skill_name": "thinker",
+  "version": "2.0.0",
+  "evals": [
+    {
+      "id": "E01-churn-blanket-discount",
+      "prompt": "Our SaaS churn rose from 4% to 7% in two quarters. Sales says price is the problem and wants a 20% blanket discount immediately. Apply Thinker and produce the required Markdown report. We have not yet segmented churn by cohort, plan, tenure, or reason code.",
+      "expected_output": "A proportionate STANDARD analysis that treats the blanket discount as a hypothesis, asks only decision-critical questions, selects material lanes, and proposes discriminating evidence or a reversible test before a broad price cut.",
+      "expectations": [
+        "Routes to STANDARD or justifies DEEP only if new stakes warrant it",
+        "Treats price causation and the blanket discount as claims or hypotheses rather than facts",
+        "Selects only material lanes and records selected and skipped lanes with reasons",
+        "Identifies churn segmentation and reason-quality as decision-critical evidence gaps",
+        "Compares blanket discount with targeted or no-discount alternatives",
+        "Audits all five pitfalls and repairs detected issues",
+        "Produces a docs/ Markdown report with executive-summary findings table"
+      ]
+    },
+    {
+      "id": "E02-inspection-sampling-dashboard",
+      "prompt": "A factory quality dashboard shows 99.8% pass rate. Leadership wants to replace 100% final inspection with 5% random sampling next month to save cost. No one has reviewed the dashboard denominator, rework exclusions, escape rate, customer severity, or measurement-system capability. Use Thinker.",
+      "expected_output": "A DEEP evidence- and consequence-heavy analysis that blocks premature rollout until metric meaning and high-severity escape risk are verified, while defining the smallest safe learning path.",
+      "expectations": [
+        "Routes to DEEP because downside and measurement uncertainty are material",
+        "Challenges the 99.8% metric at face value including denominator and exclusions",
+        "Distinguishes pass-rate correlation from evidence that 5% sampling is safe",
+        "Uses evidence and consequence lanes and explains every lane selection",
+        "Considers severity, detectability, customer escape, rollback, and monitoring",
+        "Avoids fabricating probabilities or capability values",
+        "Requires dual Opus validation or marks validation blocked"
+      ]
+    },
+    {
+      "id": "E03-engineering-deadline-blame",
+      "prompt": "Three releases slipped. The VP says the project manager is weak and should be replaced. The team mentions dependency churn, late security reviews, scope changes, and unclear acceptance criteria. Apply Thinker and recommend what to do.",
+      "expected_output": "A STANDARD anti-anchoring analysis that reframes personnel blame as one hypothesis, expands to system interfaces, identifies discriminating evidence, and recommends proportionate action.",
+      "expectations": [
+        "Does not endorse replacing the PM before testing alternative causal stories",
+        "Uses a neutral problem statement focused on repeated schedule misses",
+        "Examines interfaces, scope, dependencies, review timing, and acceptance criteria",
+        "Identifies no more than three primary drivers unless evidence requires more",
+        "States what evidence would distinguish PM execution from systemic causes",
+        "Includes consequences of both premature replacement and inaction",
+        "Shows all six gates at proportional depth"
+      ]
+    },
+    {
+      "id": "E04-cloud-vendor-under-specified",
+      "prompt": "Choose between Cloud A and Cloud B for our new platform. I have not given workload shape, region or residency needs, availability target, team skills, lock-in tolerance, budget horizon, migration constraints, or security requirements. Use Thinker.",
+      "expected_output": "A STANDARD intake-first response that probes a compact set of highest-value unknowns instead of pretending to choose a vendor, and records how answers affect the decision.",
+      "expectations": [
+        "Recognizes the decision is materially under-specified",
+        "Asks no more than five grouped decision-critical questions in the first round",
+        "Does not ask the user to repeat supplied information",
+        "Explains or implies how each question can change option ranking, risk, or action",
+        "Does not fabricate vendor-specific facts or select a winner without evidence",
+        "Uses a proportional lane plan rather than all five lanes by default",
+        "Carries non-critical unknowns as labeled assumptions when appropriate"
+      ]
+    },
+    {
+      "id": "E05-meeting-monday-tuesday",
+      "prompt": "Our 8-person internal team can move its weekly 30-minute sync from Monday 10:00 to Tuesday 10:00. No customers attend, the change is reversible, and six people already said either day is fine. Two people have not replied. Use Thinker and give us a decision.",
+      "expected_output": "A LIGHT analysis that applies all six gates compactly, avoids a swarm, and recommends a low-cost reversible decision or quick check without over-analysis.",
+      "expectations": [
+        "Routes to LIGHT",
+        "Uses zero or at most one specialist lane",
+        "Applies all six gates compactly",
+        "Does not launch five agents or request extensive evidence",
+        "Recognizes reversibility and low downside",
+        "Makes a direct proportionate recommendation with a simple revisit trigger",
+        "Keeps the report concise while meeting the required executive-summary table contract"
+      ]
+    },
+    {
+      "id": "E06-live-chat-anecdote",
+      "prompt": "Two enterprise prospects asked for live chat this month. Sales says this proves we should staff 24/7 live chat globally. We have no data on expected contact volume, conversion impact, support deflection, staffing cost, region mix, or service-level expectations. Use Thinker.",
+      "expected_output": "A STANDARD analysis that separates anecdotes from demand evidence, finds the critical unknowns, and favors a measurable reversible pilot if appropriate.",
+      "expectations": [
+        "Treats two prospect requests as weak evidence rather than proof of global demand",
+        "Identifies the smallest set of demand, economics, and service-level unknowns that can change the decision",
+        "Selects evidence and consequence analysis when material",
+        "Considers a scoped pilot and explicit success or failure signals",
+        "Compares 24/7 rollout with narrower coverage and do-nothing or delay",
+        "Checks second-order staffing and expectation effects",
+        "Keeps user questions within STANDARD budget"
+      ]
+    },
+    {
+      "id": "E07-project-atlas-cash",
+      "prompt": "Project Atlas has spent $1.8M. Remaining forecast is $900k over 6 months. Company unrestricted cash is $2.4M, current net burn is $420k/month excluding Atlas, and pausing Atlas within 30 days would trigger a $120k vendor termination fee. The CEO asks whether to pause Atlas now. Atlas has no signed customer commitments, but two design partners are testing a prototype. Apply Thinker.",
+      "expected_output": "A STANDARD or DEEP cash-risk analysis that extracts supplied numbers, does not re-ask them, separates sunk cost from future decision drivers, checks runway logic, and gives a calibrated action with triggers.",
+      "expectations": [
+        "Extracts all supplied cash, burn, remaining forecast, fee, timing, and commitment facts before asking",
+        "Does not use the $1.8M sunk spend as a reason by itself to continue",
+        "Identifies cash runway, Atlas future cash need, and customer evidence as leading decision drivers",
+        "Shows calculations or clearly states what additional cash timing detail is needed",
+        "Compares pause, continue, and a bounded milestone or staged option",
+        "Includes reversibility, termination consequences, and explicit revisit triggers",
+        "Produces a calibrated recommendation rather than false certainty"
+      ]
+    },
+    {
+      "id": "E08-conflicting-conversion-rpv",
+      "prompt": "After a checkout redesign, conversion is down 18%, but revenue per visitor is up 9%. Marketing says the redesign failed; finance says it succeeded. Traffic mix also shifted toward enterprise buyers and we changed how free-trial starts are counted. Use Thinker.",
+      "expected_output": "A STANDARD evidence-centered analysis that refuses the false binary, reconciles metric definitions and mix effects, and specifies discriminating analysis before a broad rollback or victory claim.",
+      "expectations": [
+        "Recognizes conflicting metrics and changed measurement definitions",
+        "Does not accept either marketing or finance conclusion at face value",
+        "Checks cohort or segment mix and metric definition comparability",
+        "Distinguishes descriptive change from causal attribution to the redesign",
+        "Selects evidence analysis as material and avoids unnecessary lanes",
+        "Defines what result would justify rollback, keep, or segment-specific action",
+        "Preserves unresolved disagreement through evidence or scenario split rather than averaging"
+      ]
+    }
+  ]
+}
