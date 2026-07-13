@@ -10,52 +10,51 @@ The governing principle is:
 
 ## Runtime flow
 
-```text
-User problem / files / accessible evidence
-                  |
-                  v
-      Thinker skill — Claude Sonnet 5
-      intake -> classify -> route
-                  |
-        +---------+---------+
-        |         |         |
-      LIGHT    STANDARD    DEEP
-        |         |         |
-        +---- decision-value probing ----+
-                  |
-           material lane test
-                  |
-     +------------+------------+------------------+
-     |            |            |                  |
-problem-framer  systems   evidence-challenger  priority / consequence
-    Sonnet 5    Sonnet 5        Sonnet 5            Sonnet 5
-     \            |               |                  /
-      +-----------+---------------+-----------------+
-                  |
-       coordinator only when needed
-            Claude Sonnet 5
-                  |
-    +-------------+------------------------------+
-    |                                            |
-LIGHT / uncomplicated STANDARD         DEEP / conflict / coupling
-    Sonnet 5 inline synthesis              Opus 4.8 synthesis
-    |                                            |
-    +--------------------+-----------------------+
-                         |
-            docs/thinker-<slug>.md draft
-                         |
-          +--------------+--------------+
-          |                             |
- Opus 4.8 primary validator     Opus 4.8 adversary
-          |        independent + parallel       |
-          +--------------+--------------+
-                         |
-             approve / repair and rerun both
-                         |
-              Opus 4.8 arbiter if needed
-                         |
-           VALIDATED or VALIDATION BLOCKED
+```mermaid
+flowchart TD
+    IN["User problem / files / accessible evidence"] --> SKILL["Thinker skill — Claude Sonnet 5<br/>intake → classify → route"]
+
+    SKILL --> LIGHT([LIGHT])
+    SKILL --> STANDARD([STANDARD])
+    SKILL --> DEEP([DEEP])
+
+    LIGHT --> PROBE["Decision-value probing"]
+    STANDARD --> PROBE
+    DEEP --> PROBE
+
+    PROBE --> MLT["Material lane test"]
+
+    MLT --> PF["problem-framer<br/>Sonnet 5"]
+    MLT --> SE["systems-expander<br/>Sonnet 5"]
+    MLT --> EC["evidence-challenger<br/>Sonnet 5"]
+    MLT --> PCq["priority / consequence<br/>Sonnet 5"]
+
+    PF --> LADV["lane-adversary cross-examination<br/>Sonnet 5"]
+    SE --> LADV
+    EC --> LADV
+    PCq --> LADV
+
+    LADV --> COORD["Coordinator, only when needed<br/>Claude Sonnet 5"]
+
+    COORD --> SYNL["Sonnet 5 inline synthesis<br/>LIGHT / uncomplicated STANDARD"]
+    COORD --> SYND["Opus 4.8 synthesis<br/>DEEP / conflict / coupling"]
+
+    SYNL --> DRAFT["docs/thinker-&lt;slug&gt;.md draft"]
+    SYND --> DRAFT
+
+    DRAFT --> VAL["Opus 4.8 primary validator"]
+    DRAFT --> AADV["Opus 4.8 adversary"]
+
+    VAL --> REV{"Independent + parallel:<br/>approve, or repair &amp; rerun both"}
+    AADV --> REV
+
+    REV -->|repair| DRAFT
+    REV -->|disagreement| ARB["Opus 4.8 arbiter"]
+    REV -->|approve| OUT["VALIDATED or VALIDATION BLOCKED"]
+    ARB --> OUT
 ```
+
+> The final gate prefers `claude-opus-4-8` and falls back within the Opus tier (`4.7` → `4.6` → `4.5`); in DEEP (and high-consequence STANDARD) a different-family `crossmodel-adversary` runs alongside the Opus reviewers. See the model-allocation table below and `references/model-map.md`.
 
 ## Mode matrix
 
@@ -145,8 +144,16 @@ The suite contains 30 decision cases spanning low-risk reversible choices, under
 
 Each case runs under four variants:
 
-```text
-30 cases x [BASELINE, LIGHT, STANDARD, DEEP] = 120 runtime runs
+```mermaid
+flowchart LR
+    C["30 decision cases"] --> B([BASELINE])
+    C --> L([LIGHT])
+    C --> S([STANDARD])
+    C --> D([DEEP])
+    B --> R["120 runtime runs"]
+    L --> R
+    S --> R
+    D --> R
 ```
 
 A blind Opus judge scores ten 0-4 quality metrics. Telemetry separately records tokens, latency, model calls, user questions, and lane count. Recommendation signatures are compared to detect whether deeper analysis changes the answer for a defensible reason or merely creates analytical instability.
