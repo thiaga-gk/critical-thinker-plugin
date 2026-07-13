@@ -17,11 +17,22 @@ BENCH_SCRIPT = ROOT / "scripts" / "benchmark.py"
 MANIFEST = ROOT / "manifest.txt"
 REFS = ROOT / "skills" / "thinker" / "references"
 AGENTS = ROOT / "agents"
+MODEL_MAP = REFS / "model-map.md"
 
-REQUIRED_PATHS = [SKILL, EVALS, BENCH, PLUGIN, BENCH_SCRIPT, MANIFEST]
+REQUIRED_PATHS = [SKILL, EVALS, BENCH, PLUGIN, BENCH_SCRIPT, MANIFEST, MODEL_MAP]
 # claude-fable-5 is permitted ONLY for the cross-model decorrelation reviewer (a different
 # model family than Opus 4.8), so the final gate is model-diverse, not merely prompt-diverse.
 ALLOWED_AGENT_MODELS = {"claude-sonnet-5", "claude-opus-4-8", "claude-fable-5"}
+# Fallback models are NOT permitted in frontmatter (pins stay exact) — they are runtime
+# overrides applied per references/model-map.md. Listed here so the map stays in sync:
+# every one of these IDs must be documented in model-map.md.
+ALLOWED_FALLBACK_MODELS = {
+    "claude-opus-4-7",
+    "claude-opus-4-6",
+    "claude-opus-4-5",
+    "claude-sonnet-4-6",
+    "claude-sonnet-4-5",
+}
 EXPECTED_AGENTS = {
     "problem-framer.md": "claude-sonnet-5",
     "systems-expander.md": "claude-sonnet-5",
@@ -81,8 +92,8 @@ def check_plugin() -> None:
     plugin = load_json(PLUGIN)
     if plugin.get("name") != "thinker":
         fail("plugin name must be thinker")
-    if plugin.get("version") != "2.1.0":
-        fail("plugin version must be 2.1.0")
+    if plugin.get("version") != "2.2.0":
+        fail("plugin version must be 2.2.0")
 
 
 def check_skill() -> int:
@@ -111,6 +122,7 @@ def check_skill() -> int:
             "executive summary",
             "lane-selection rationale",
             "do not launch five lanes by habit",
+            "references/model-map.md",
         ],
         "SKILL.md",
     )
@@ -206,6 +218,9 @@ def check_references() -> None:
             "claude-fable-5",
             "re-derive",
             "scope completeness",
+            # Certifier version-fallback stays within the Opus tier and points to the map.
+            "model-map.md",
+            "claude-opus-4-7",
         ],
         "opus-validation.md",
     )
@@ -239,6 +254,37 @@ def check_references() -> None:
     require_terms(probing, ["decision value", "light", "standard", "deep", "question budget", "user burden"], "user-probing.md")
 
 
+def check_model_map() -> None:
+    if not MODEL_MAP.is_file():
+        fail("missing references/model-map.md")
+    m = lower(MODEL_MAP)
+    require_terms(
+        m,
+        [
+            "preferred",
+            "fallback",
+            "capability floor",
+            "model diversity",
+            "claude-sonnet-5",
+            "claude-opus-4-8",
+            "claude-fable-5",
+            "validation blocked",
+            "model diversity unavailable",
+            # decorrelation reviewer must stay a different family than the certifier
+            "non-opus",
+        ],
+        "model-map.md",
+    )
+    # every fallback ID the policy relies on must be documented so the map stays in sync
+    missing = sorted(fid for fid in ALLOWED_FALLBACK_MODELS if fid not in m)
+    if missing:
+        fail(f"model-map.md must document fallback models: {missing}")
+    # a fallback must never be a pinned frontmatter value — the pins stay exact
+    overlap = ALLOWED_FALLBACK_MODELS & ALLOWED_AGENT_MODELS
+    if overlap:
+        fail(f"fallback models must not overlap pinned agent models: {sorted(overlap)}")
+
+
 def check_manifest() -> None:
     manifest_entries = {line.strip() for line in text(MANIFEST).splitlines() if line.strip()}
     actual_entries = {
@@ -250,6 +296,7 @@ def check_manifest() -> None:
         and path.suffix != ".zip"
         and "__pycache__" not in path.parts
         and ".git" not in path.parts  # keep the check robust inside a git repo
+        and ".claude" not in path.parts  # local Claude Code tooling/config, never package content
     }
     if manifest_entries != actual_entries:
         fail(
@@ -296,6 +343,7 @@ def main() -> int:
         check_agents()
         core_count, bench_count = check_evals()
         check_references()
+        check_model_map()
         design_gates = check_design_gates()
         check_manifest()
     except AssertionError as exc:
@@ -306,6 +354,7 @@ def main() -> int:
     print(f"PASS: SKILL.md lines={line_count} (<500).")
     print(f"PASS: agent model policy verified for {len(EXPECTED_AGENTS)} agents; pinned Sonnet 5, Opus 4.8, and (cross-model reviewer only) Fable 5.")
     print("PASS: final validator/adversary/arbiter are pinned to claude-opus-4-8; crossmodel-adversary pinned to claude-fable-5 for a model-diverse gate.")
+    print(f"PASS: model-map.md documents per-role fallback chains ({len(ALLOWED_FALLBACK_MODELS)} fallback IDs); certifier stays within the Opus tier, decorrelation reviewer stays non-Opus.")
     print(f"PASS: {core_count} core eval cases and {bench_count} behavioral benchmark cases loaded.")
     print("PASS: docs/ Markdown report contract includes analysis mode, lane-selection ledger, and executive-summary findings table.")
     print("PASS: design acceptance score 10/10.")

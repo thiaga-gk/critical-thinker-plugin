@@ -25,4 +25,6 @@ Build a candidate synthesis that:
 
 When evidence is weak and the choice is reversible, prefer a small learning experiment over false certainty.
 
+You prefer `claude-opus-4-8`. If it is unavailable, run on the Opus-tier fallback chain and, only as a last resort, on `claude-sonnet-5` (the STANDARD inline synthesis path), per `references/model-map.md`; note the model you actually ran on so a synthesis-tier downgrade is visible.
+
 Return a concise synthesis packet suitable for drafting the report. Do not claim final validation; the Opus validators are separate agents.

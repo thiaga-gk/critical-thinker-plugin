@@ -16,7 +16,7 @@ Do not show any validator another's output before all complete.
 
 Two reviewers on the same model are only *prompt*-diverse: they share the model family's blind spots, so a defect both miss can pass. Therefore the final panel must be **model-diverse** — at least one required reviewer runs on a different model family than the Opus 4.8 certifier.
 
-- The primary certifier is `final-opus-validator` on `claude-opus-4-8` (fail-closed; never certify on a weaker or unauditable model).
+- The primary certifier is `final-opus-validator`, preferring `claude-opus-4-8` and, when 4.8 is unavailable, falling back **within the Opus tier** (`claude-opus-4-7` → `claude-opus-4-6` → `claude-opus-4-5`) and recording the actual version. It is fail-closed **at the tier**: it never certifies on Sonnet, Fable, Haiku, or an unauditable model, and if no Opus-tier model can run the status is `VALIDATION BLOCKED`. The ordered chains for every role are in `references/model-map.md`.
 - The decorrelation reviewer is `crossmodel-adversary`, **preferably on `claude-fable-5`**; if Fable 5 is unavailable, **fall back to `claude-sonnet-5`** (invoke the same reviewer with a Sonnet 5 model override). Sonnet 5 is still a different family than Opus 4.8 — so it preserves decorrelation — and it is the always-available floor model. Whichever model runs, the reviewer reports its actual model so the diversity is auditable. Its rejection is a veto that forces repair or arbitration exactly like an Opus rejection — its *agreement* is not what certifies, but its *disagreement* cannot be ignored.
 - Because Sonnet 5 is always available, a model-diverse gate should effectively always be achievable. Record `MODEL DIVERSITY UNAVAILABLE` only in the rare event that **neither** Fable 5 nor Sonnet 5 can run.
 
@@ -45,7 +45,7 @@ Each validator explicitly assesses:
 
 ```markdown
 DECISION: APPROVE | REJECT
-MODEL: claude-opus-4-8
+MODEL: [the Opus-tier model actually run — claude-opus-4-8, or a recorded fallback version per model-map.md]
 
 ## Blocking defects
 - [none, or numbered defects]
@@ -99,8 +99,8 @@ The arbiter independently inspects the report before resolving the disagreement.
 
 ## Final status
 
-- `VALIDATED`: both Opus validators approve, or the Opus arbiter approves after independent review.
+- `VALIDATED`: both Opus validators approve, or the Opus arbiter approves after independent review. The certifier may be a recorded Opus-tier fallback version (e.g. `VALIDATED (certifier: claude-opus-4-7)`) — never below the Opus tier.
 - `DRAFT — REPAIR REQUIRED`: validator or arbiter rejects and repair is incomplete.
-- `VALIDATION BLOCKED`: `claude-opus-4-8` is unavailable, repeatedly fails, or actual final-gate model cannot be confirmed.
+- `VALIDATION BLOCKED`: **no Opus-tier model** (`claude-opus-4-8` → `claude-opus-4-7` → `claude-opus-4-6` → `claude-opus-4-5`) can run, the gate repeatedly fails, or the actual final-gate model cannot be confirmed.
 
 Never convert a blocked status into `VALIDATED` with Sonnet or an unknown fallback.

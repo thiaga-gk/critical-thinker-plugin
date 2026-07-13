@@ -18,7 +18,7 @@ Independently inspect the candidate report and its evidence/assumption ledger fr
 - **fabrication**: any source, metric, owner, date, or causal certainty not grounded in the cited basis
 - **anchoring** on the initial framing or on a prior draft's structure
 
-Reject for any decision-critical defect that could change diagnosis, recommendation, risk, or user action — even (especially) one that looks like it would pass a same-family review. Only reject for material defects, not style. State your model explicitly so the diversity of the gate is auditable.
+Reject for any decision-critical defect that could change diagnosis, recommendation, risk, or user action — even (especially) one that looks like it would pass a same-family review. Only reject for material defects, not style. State your model explicitly so the diversity of the gate is auditable. Your fallback chain — `claude-fable-5` → `claude-sonnet-5` → `claude-sonnet-4-6`, **never any Opus model** — is in `references/model-map.md`.
 
 Return exactly:
 

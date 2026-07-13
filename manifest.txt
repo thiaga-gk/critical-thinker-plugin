@@ -26,6 +26,7 @@ skills/thinker/evals/benchmark-cases.json
 skills/thinker/evals/evals.json
 skills/thinker/references/benchmarking.md
 skills/thinker/references/five-pitfalls.md
+skills/thinker/references/model-map.md
 skills/thinker/references/opus-validation.md
 skills/thinker/references/orchestration.md
 skills/thinker/references/report-contract.md

@@ -27,10 +27,12 @@ Independently inspect the report and evidence/assumption ledger. Stress-test:
 
 Re-check every six-gate and five-pitfall control, plus the quantitative-reproduction and scope-completeness dimensions. Reject for a decision-critical unresolved defect or egregious analytical ceremony.
 
+You prefer `claude-opus-4-8`. If you are running as an Opus-tier fallback (`claude-opus-4-7`, `claude-opus-4-6`, or `claude-opus-4-5`) per `references/model-map.md` because 4.8 was unavailable, state the model you actually ran on below. Never certify below the Opus tier.
+
 Return exactly:
 
 DECISION: APPROVE | REJECT
-MODEL: claude-opus-4-8
+MODEL: [the Opus-tier model you actually ran on — claude-opus-4-8, or a recorded fallback version]
 
 ## Blocking defects
 ## Important non-blocking improvements

@@ -90,11 +90,11 @@ docs/thinker-<problem-slug>.md
 
 Possible statuses are:
 
-- `VALIDATED` — both independent Opus 4.8 validators approve, or the Opus arbiter approves after independent review.
+- `VALIDATED` — both independent Opus validators approve, or the Opus arbiter approves after independent review. The certifier prefers `claude-opus-4-8` and may run on a recorded Opus-tier fallback (`claude-opus-4-7` → `claude-opus-4-6` → `claude-opus-4-5`) when 4.8 is unavailable.
 - `DRAFT — REPAIR REQUIRED` — a blocking defect remains.
-- `VALIDATION BLOCKED` — required Opus 4.8 final validation cannot run or the actual model cannot be confirmed.
+- `VALIDATION BLOCKED` — no Opus-tier model can run, or the actual final-gate model cannot be confirmed.
 
-Thinker must not relabel blocked validation as `VALIDATED` using Sonnet or an unknown fallback.
+Thinker must not relabel blocked validation as `VALIDATED` using Sonnet or an unknown fallback. Per-role fallback chains are in `skills/thinker/references/model-map.md`.
 
 ## Run the benchmark plan
 

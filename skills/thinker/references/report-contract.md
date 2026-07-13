@@ -96,7 +96,7 @@ The structure is proportional by mode. Required headings are shown below; LIGHT 
 | final-opus-adversary | claude-opus-4-8 | ... | ... |
 | crossmodel-adversary (DEEP) | claude-fable-5 (or claude-sonnet-5 fallback) | ... | ... |
 
-List each reviewer's **actual** model so the panel's **model diversity** is auditable. In DEEP the panel must include a different-family reviewer (Fable 5 preferred, Sonnet 5 fallback — both different families than Opus 4.8); see `opus-validation.md`.
+List each reviewer's **actual** model so the panel's **model diversity** is auditable. In DEEP the panel must include a different-family reviewer (Fable 5 preferred, Sonnet 5 fallback — both different families than Opus 4.8); see `opus-validation.md`. A certifier that ran on an Opus-tier fallback (e.g. `claude-opus-4-7`) records that actual version in the Model column and the report is still `VALIDATED`; the ordered fallback chains are in `model-map.md`.
 
 ### Validation resolution
 [Explain repairs, agreement, cross-model decorrelation catches, or arbiter decision.]

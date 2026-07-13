@@ -15,6 +15,13 @@ The skill is designed for root-cause analysis, ambiguous decisions, conflicting 
 - Added a blind `benchmark-opus-judge` so length, model prestige, and agent count are not treated as quality signals.
 - Expanded the report contract with the analysis mode, mode rationale, adaptive lane-selection ledger, and executive-summary findings table.
 
+## What changed in v2.2
+
+- **Model map with per-role fallbacks** (`references/model-map.md`): frontmatter `model:` is now the *preferred* model, and each role has an ordered fallback chain applied as a runtime override when the preferred model or version is unavailable — for environments that lack a specific model. Two invariants hold: a **capability floor** (never below the role's tier; never Haiku/`inherit`) and **model diversity** (the cross-model reviewer stays a different family than the certifier).
+- **Opus-tier certifier fallback**: the final certifier prefers `claude-opus-4-8` and now falls back **within the Opus tier** (`claude-opus-4-7` → `claude-opus-4-6` → `claude-opus-4-5`), recording the actual version (e.g. `VALIDATED (certifier: claude-opus-4-7)`). It stays fail-closed — `VALIDATION BLOCKED` only when no Opus-tier model can run — and never certifies on Sonnet, Fable, or Haiku.
+- **Auditable actual models**: every certifier records the model it actually ran on; the decorrelation reviewer's chain (`claude-fable-5` → `claude-sonnet-5` → `claude-sonnet-4-6`) is constrained to non-Opus so diversity never collapses.
+- The package validator enforces the map (documented fallback IDs, in-tier certifier, non-Opus decorrelation) while keeping all frontmatter pins exact.
+
 ## What changed in v2.1
 
 Four fixes that move verification earlier and decorrelate the final gate — motivated by cases where a draft passed its own self-graded gates yet a defect only surfaced at (or slipped past) the final review:
@@ -64,7 +71,7 @@ All modes still apply all six work gates and all five pitfall checks. Mode chang
 | Validation arbiter | `claude-opus-4-8` |
 | Blind benchmark judge | `claude-opus-4-8` |
 
-Final validation fails closed. When Opus 4.8 cannot run or the actual final-gate model cannot be confirmed, the report must say `VALIDATION BLOCKED`; Sonnet is not accepted as a substitute **certifier**. The cross-model decorrelation reviewer prefers `claude-fable-5` and **falls back to `claude-sonnet-5`** — both a different family than Opus 4.8, and Sonnet 5 is always available — so a model-diverse gate is effectively always achievable; the report records `MODEL DIVERSITY UNAVAILABLE` only if neither can run.
+Final validation fails closed **at the Opus tier**. The certifier prefers `claude-opus-4-8` and may fall back within the Opus tier (`claude-opus-4-7` → `claude-opus-4-6` → `claude-opus-4-5`), recording the actual version (e.g. `VALIDATED (certifier: claude-opus-4-7)`); only when no Opus-tier model can run — or the actual final-gate model cannot be confirmed — does the report say `VALIDATION BLOCKED`. Sonnet is never accepted as a substitute **certifier**. The cross-model decorrelation reviewer prefers `claude-fable-5` and **falls back to `claude-sonnet-5` → `claude-sonnet-4-6`** (never Opus) — so a model-diverse gate is effectively always achievable; the report records `MODEL DIVERSITY UNAVAILABLE` only if neither can run. Per-role fallback chains and the two invariants (capability floor, model diversity) are in `skills/thinker/references/model-map.md`.
 
 ## Output
 
